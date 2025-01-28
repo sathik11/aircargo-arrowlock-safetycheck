@@ -1,0 +1,9 @@
+streamlit
+opencv-python-headless
+numpy
+Pillow
+scikit-image
+azure-cognitiveservices-vision-customvision
+msrest
+python-dotenv
+openai

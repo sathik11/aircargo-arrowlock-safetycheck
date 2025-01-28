@@ -1,0 +1,102 @@
+# Prompt: Cargo Lock Assessment
+
+Review the images of cargo taken from the air cargo belly and assess the fastening of the cargo locks. The locks are either red or yellow and are located below the loaded Container/Pallet and are indicated by green rectangle bounding boxes. Generate an output containing your assessment with a confidence score. The confidence score reflects the reliability of your assessment, not the safety for lifting. When in doubt, assign a lower score and state the reason for it.  
+If you are unsure of whether locks are fastened or unfastened, set the confidence to 1 and evaluate safety as "Undetermined."
+
+## Steps
+
+1. **Identify Cargo Loaded**:  
+   Determine if a Container or Pallet is present in the image. If locks are seen, a container is present.  
+
+2. **Count Locks Seen**:  
+   Look for locks only seen near the Container/Pallet and carefully inspect the bounding boxes highlighted in green.  
+
+3. **Assess Each Lock**:  
+   - **Fastened Locks**: Count locks that are clamped and secure.  
+   - **Unfastened Locks**: Count locks that are not clamped—ensure clamps are locked, and levers are secured to the container.  
+
+4. **Evaluate Safety**:  
+   Based on the assessment, judge if it is safe to lift the cargo.  
+
+5. **Assign Confidence Score**:  
+   Rate your confidence in the assessment from 1 to 5.
+
+## Output Format
+
+```json
+{
+  "CargoLoaded": "Yes/No",
+  "#Locks In Container Vicinity": "<count>",
+  "#Locks raised": "<count>",
+  "#Locks unraised": "<count>",
+  "Confidence raised locks": [<confidence_scores>],
+  "Confidence unraised locks": [<confidence_scores>],
+  "Safe": "Yes/No/Undetermined",
+  "Confidence_Score": "<1-5>",
+  "Timestamp": "<timestamp>"
+}
+```
+
+**Examples of Expected Outputs**
+
+Input: [Image of cargo with fastened locks]
+
+Output:
+
+## Example 1: All Locks Fastened
+```json
+{
+  "CargoLoaded": "Yes",
+  "#Locks In Container Vicinity": "4",
+  "#Locks raised": "4",
+  "#Locks unraised": "0",
+  "Confidence raised locks": [95, 90, 88, 92],
+  "Confidence unraised locks": [],
+  "Safe": "Yes",
+  "Confidence_Score": "5",
+  "Timestamp": "2025-01-28T14:30:00Z"
+}
+
+**Example 2:**
+
+Input: [Image of Unfastened Locks Detected]
+
+Output:
+
+```json
+{
+  "CargoLoaded": "Yes",
+  "#Locks In Container Vicinity": "3",
+  "#Locks raised": "2",
+  "#Locks unraised": "1",
+  "Confidence raised locks": [87, 90],
+  "Confidence unraised locks": [85],
+  "Safe": "No",
+  "Confidence_Score": "4",
+  "Timestamp": "2025-01-28T15:00:00Z"
+}
+```
+**Example 3:**
+
+Input: [Image of Cargo Not Detected]
+
+Output:
+
+```json
+{
+  "CargoLoaded": "No",
+  "#Locks In Container Vicinity": "0",
+  "#Locks raised": "0",
+  "#Locks unraised": "0",
+  "Confidence raised locks": [],
+  "Confidence unraised locks": [],
+  "Safe": "Undetermined",
+  "Confidence_Score": "1",
+  "Timestamp": "2025-01-28T15:30:00Z"
+}
+```
+# Notes
+
+- Ensure your evaluation is thorough and accurate, especially regarding the Locks identified and Fastened.
+- The confidence score should reflect how certain you are of the number and status of the locks.
+- Clearly differentiate between fastened and unfastened locks based on their appearance in the image.
