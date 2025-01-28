@@ -5,7 +5,9 @@ Sample Architecture as follows.
 
 **Build Your Docker Image:** You need to build a Docker image from your Dockerfile. Run the following command in the directory containing your Dockerfile:
 
+```
 docker build -t cargolockdetection .
+```
 
 **Push the Docker Image to Azure Container Registry (ACR) or Docker Hub:** You can push the image to ACR or Docker Hub. Here is an example of pushing it to Azure Container Registry:
 
@@ -55,4 +57,5 @@ To deploy a updated version of your Streamlit app with latest code, create a new
    Use Azure portal to update the Azure Container App to use the new image tag.
 
 Improvements:
-To update the AOAI to use structured output.
+To update the AOAI to use structured output. 
+storage of images to Azure blob is not implemented in this version
