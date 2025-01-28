@@ -2,12 +2,11 @@
 
 ## AirCargo ArrowLock Safety Analyzer
 
-##### System Architecture
+#### System Architecture
 
+![image](https://github.com/sathik11/aircargo-arrowlock-safetycheck/blob/main/docs/systemarch.jpg)
 
 ---
-
-
 
 This app is deployed to azure as Azure container app.
 
